@@ -6,7 +6,7 @@
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "source": "src/index.tsx",
-  "author": "santhaug",
+  "author": "metastore",
   "license": "MIT",
   "homepage": "https://github.com/MetastoreOfficial/",
   "repository": {
@@ -15,9 +15,11 @@
   },
   "keywords": [
     "metastore",
-    "metastore react package",
-    "game integration",
-    "metastore game"
+    "sdk",
+    "UI",
+    "React",
+    "game",
+    "integration"
   ],
   "engines": {
     "node": ">=10"
