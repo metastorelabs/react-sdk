@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 
 import { CloseButton } from '../src'
 
-// component/CloseButton.tsx
+// component/CloseButton
 describe('CloseButton component', () => {
   it('should render with children', () => {
     const { getByText } = render(<CloseButton>Close</CloseButton>)
