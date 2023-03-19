@@ -6,12 +6,12 @@
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "source": "src/index.tsx",
-  "author": "metastore",
+  "author": "metastore team",
   "license": "Apache-2.0",
   "homepage": "https://github.com/MetastoreOfficial/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MetastoreOfficial/metastore-react-package.git"
+    "url": "git+https://github.com/MetastoreOfficial/react-sdk.git"
   },
   "keywords": [
     "metastore",
