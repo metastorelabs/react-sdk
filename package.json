@@ -13,6 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/MetastoreOfficial/react-sdk.git"
   },
+  "access": "public",
   "keywords": [
     "metastore",
     "sdk",
@@ -32,7 +33,8 @@
     "test": "jest --config jestconfig.json",
     "typecheck": "tsc --noEmit",
     "prepare": "yarn run build",
-    "prepublishOnly": "yarn test && yarn run prettier && yarn run lint"
+    "prepublishOnly": "yarn test && yarn run prettier && yarn run lint",
+    "publish": "yarn publish --access public"
   },
   "peerDependencies": {
     "react": ">=16"
