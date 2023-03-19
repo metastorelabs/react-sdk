@@ -7,7 +7,7 @@
   "types": "./dist/esm/index.d.ts",
   "source": "src/index.tsx",
   "author": "metastore",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/MetastoreOfficial/",
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
     "prettier": "prettier --write \"{src,tests,example/src}/**/*.{js,ts,jsx,tsx}\"",
     "test": "jest --config jestconfig.json",
+    "typecheck": "tsc --noEmit",
     "prepare": "yarn run build",
     "prepublishOnly": "yarn test && yarn run prettier && yarn run lint"
   },
