@@ -1,7 +1,7 @@
 import React from 'react'
 
 type CloseButtonProps = {
-  children?: React.ReactNode
+  children: React.ReactNode
 }
 
 const CloseButton = ({ children }: CloseButtonProps) => {
