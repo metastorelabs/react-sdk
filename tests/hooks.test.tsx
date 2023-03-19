@@ -63,7 +63,7 @@ describe('useMetastoreData', () => {
     window.dispatchEvent(messageEvent)
 
     expect(window.parent.postMessage).toHaveBeenCalledTimes(1)
-    expect(window.parent.postMessage).toHaveBeenCalledWith('getMetastoreData', 'https://meta-store.in')
+    expect(window.parent.postMessage).toHaveBeenCalledWith({ event: 'getMetastoreData' }, 'https://meta-store.in')
   })
 
   it('should update data and set loading to false when "metastoreData" message is received', () => {

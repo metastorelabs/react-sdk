@@ -24,7 +24,7 @@ function useMetastoreData(): { data: MetastoreData | null; loading: boolean; isM
         const { message, data } = event.data
 
         if (message === 'loaded') {
-          window.parent.postMessage('getMetastoreData', 'https://meta-store.in')
+          window.parent.postMessage({ event: 'getMetastoreData' }, 'https://meta-store.in')
         } else if (message === 'metastoreData') {
           setData(data)
           setLoading(false)
