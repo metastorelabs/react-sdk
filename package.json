@@ -59,6 +59,6 @@
     "typescript": "^5.0.2"
   },
   "files": [
-    "dist"
-  ]
+    "dist/**/*"
+   ]
 }
