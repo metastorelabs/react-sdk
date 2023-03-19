@@ -25,7 +25,7 @@ jobs:
       # check if the github release version is the same as the package.json version
       - name: 🏷 Check release version
         run: |
-          RELEASE_VERSION=$(echo $GITHUB_REF | cut -d '/' -f 3)
+          RELEASE_VERSION=$(echo $GITHUB_REF | cut -d '/' -f 3 | sed 's/v//')
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           if [ "$RELEASE_VERSION" != "$PACKAGE_VERSION" ]; then
             echo "Error: Release version ($RELEASE_VERSION) and package version ($PACKAGE_VERSION) do not match!"
