@@ -16,10 +16,21 @@ describe('useMetastoreData', () => {
     jest.clearAllMocks()
   })
 
-  it('should initialize with null data and loading true', () => {
+  it('should return loading=false and isMetastore=false when not loaded in iframe', () => {
     const { result } = renderHook(() => useMetastoreData())
-    expect(result.current[0]).toBeNull()
-    expect(result.current[1]).toBe(true)
+    expect(result.current.data).toBeNull()
+    expect(result.current.loading).toBe(false)
+    expect(result.current.isMetastore).toBe(false)
+  })
+
+  it('should return isMetastore=true and loading=true when loaded in iframe from meta-store.in', () => {
+    Object.defineProperty(window, 'self', { value: { location: { href: 'https://example.com' } } })
+    Object.defineProperty(window, 'top', { value: { location: { href: 'https://meta-store.in' } } })
+    Object.defineProperty(document, 'referrer', { value: 'https://meta-store.in' })
+
+    const { result } = renderHook(() => useMetastoreData())
+    expect(result.current.isMetastore).toBe(true)
+    expect(result.current.loading).toBe(true)
   })
 
   it('should listen to message event on mount and unmount', () => {
@@ -69,8 +80,9 @@ describe('useMetastoreData', () => {
       window.dispatchEvent(messageEvent)
     })
 
-    expect(result.current[0]).toEqual(mockData)
-    expect(result.current[1]).toBe(false)
+    expect(result.current.data).toEqual(mockData)
+    expect(result.current.loading).toBe(false)
+    expect(result.current.isMetastore).toBe(true)
   })
 
   it('should ignore messages from other origins', () => {
@@ -85,7 +97,8 @@ describe('useMetastoreData', () => {
     })
     window.dispatchEvent(messageEvent)
 
-    expect(result.current[0]).toBeNull()
-    expect(result.current[1]).toBe(true)
+    expect(result.current.data).toBeNull()
+    expect(result.current.loading).toBe(true)
+    expect(result.current.isMetastore).toBe(true)
   })
 })
