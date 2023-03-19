@@ -1,0 +1,75 @@
+name: 📣 Publish
+
+on:
+  # Triggers the workflow on published releases
+  release:
+    types: [published]
+
+jobs:
+  check:
+    name: 👀 Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org/
+
+      # check if the github release version is the same as the package.json version
+      - name: 🏷 Check release version
+        run: |
+          RELEASE_VERSION=$(echo $GITHUB_REF | cut -d '/' -f 3)
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$RELEASE_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "Error: Release version ($RELEASE_VERSION) and package version ($PACKAGE_VERSION) do not match!"
+            exit 1
+          fi
+
+      - name: 📦 Install dependencies
+        run: yarn && yarn install
+
+      - name: 🚦 Lint
+        run: yarn run lint
+
+      - name: ʦ Typecheck
+        run: yarn run typecheck
+
+      - name: 🧪 Test
+        run: yarn run test
+
+      - name: 🐳 Build
+        run: yarn run build
+
+  publish:
+    name: 📢 Publish
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: 📦 Install dependencies
+        run: yarn && yarn install
+
+      - name: 📢 Publish
+        run: yarn run publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
